@@ -244,13 +244,16 @@ function createBottomNavigation() {
             <span class="nav-icon">🔔</span>
             <span class="nav-label">Alerts</span>
         </a>
-        <a href="contact.html" class="nav-item" data-page="contact">
-            <span class="nav-icon">📞</span>
-            <span class="nav-label">Contact</span>
-        </a>
+        <button class="nav-item nav-more" data-page="more" aria-label="More menu">
+            <span class="nav-icon">⋯</span>
+            <span class="nav-label">More</span>
+        </button>
     `;
     
     document.body.appendChild(bottomNav);
+    
+    // Create More Menu Drawer
+    createMoreMenuDrawer();
     
     // Highlight current page
     const currentPage = getCurrentPageName();
@@ -258,18 +261,196 @@ function createBottomNavigation() {
     if (currentNavItem) {
         currentNavItem.classList.add('active');
     }
+    
+    // Handle More button click
+    const moreButton = bottomNav.querySelector('.nav-more');
+    if (moreButton) {
+        moreButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleMoreMenu();
+        });
+    }
+}
+
+// Create More Menu Drawer with all menu items
+function createMoreMenuDrawer() {
+    const drawer = document.createElement('div');
+    drawer.className = 'more-menu-drawer';
+    drawer.innerHTML = `
+        <div class="drawer-overlay"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>Menu</h3>
+                <button class="drawer-close" aria-label="Close menu">✕</button>
+            </div>
+            <div class="drawer-body">
+                <a href="about.html" class="drawer-item" data-page="about">
+                    <span class="drawer-icon">ℹ️</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">About</span>
+                        <span class="drawer-subtitle">Learn about KIUMA</span>
+                    </span>
+                </a>
+                <a href="values.html" class="drawer-item" data-page="values">
+                    <span class="drawer-icon">✨</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Values</span>
+                        <span class="drawer-subtitle">Our Islamic principles</span>
+                    </span>
+                </a>
+                <a href="activities.html" class="drawer-item" data-page="activities">
+                    <span class="drawer-icon">🎯</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Activities</span>
+                        <span class="drawer-subtitle">Community activities</span>
+                    </span>
+                </a>
+                <a href="leadership.html" class="drawer-item" data-page="leadership">
+                    <span class="drawer-icon">👥</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Leadership</span>
+                        <span class="drawer-subtitle">Our team</span>
+                    </span>
+                </a>
+                <a href="media.html" class="drawer-item" data-page="media">
+                    <span class="drawer-icon">📺</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Media</span>
+                        <span class="drawer-subtitle">Videos, audio & more</span>
+                    </span>
+                </a>
+                <a href="ask-question.html" class="drawer-item" data-page="ask-question">
+                    <span class="drawer-icon">❓</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Ask Question</span>
+                        <span class="drawer-subtitle">Get answers from scholars</span>
+                    </span>
+                </a>
+                <a href="ask-question.html#program-enrollment" class="drawer-item" data-page="join-programs">
+                    <span class="drawer-icon">📝</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Join Programs</span>
+                        <span class="drawer-subtitle">Enroll in courses</span>
+                    </span>
+                </a>
+                <a href="contact.html" class="drawer-item" data-page="contact">
+                    <span class="drawer-icon">📞</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Contact</span>
+                        <span class="drawer-subtitle">Get in touch</span>
+                    </span>
+                </a>
+                <div class="drawer-divider"></div>
+                <div class="drawer-section-title">Payments & Donations</div>
+                <a href="pay.html#semester" class="drawer-item" data-page="semester">
+                    <span class="drawer-icon">💳</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Semester Subscription</span>
+                        <span class="drawer-subtitle">Pay semester fees</span>
+                    </span>
+                </a>
+                <a href="pay.html#monthly" class="drawer-item" data-page="monthly">
+                    <span class="drawer-icon">📆</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Monthly Subscription</span>
+                        <span class="drawer-subtitle">Monthly payment</span>
+                    </span>
+                </a>
+                <a href="pay.html#zakat" class="drawer-item" data-page="zakat">
+                    <span class="drawer-icon">🤲</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Zakat</span>
+                        <span class="drawer-subtitle">Pay your Zakat</span>
+                    </span>
+                </a>
+                <a href="pay.html#charity" class="drawer-item" data-page="charity">
+                    <span class="drawer-icon">❤️</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Charity</span>
+                        <span class="drawer-subtitle">Make a donation</span>
+                    </span>
+                </a>
+                <a href="donate.html" class="drawer-item" data-page="donate">
+                    <span class="drawer-icon">💰</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Donate</span>
+                        <span class="drawer-subtitle">Support KIUMA</span>
+                    </span>
+                </a>
+                <div class="drawer-divider"></div>
+                <a href="join.html" class="drawer-item drawer-item-primary" data-page="join">
+                    <span class="drawer-icon">➕</span>
+                    <span class="drawer-text">
+                        <span class="drawer-title">Join Us</span>
+                        <span class="drawer-subtitle">Become a member</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(drawer);
+    
+    // Close drawer handlers
+    const overlay = drawer.querySelector('.drawer-overlay');
+    const closeBtn = drawer.querySelector('.drawer-close');
+    
+    overlay.addEventListener('click', closeMoreMenu);
+    closeBtn.addEventListener('click', closeMoreMenu);
+    
+    // Close drawer when clicking a menu item
+    drawer.querySelectorAll('.drawer-item').forEach(item => {
+        item.addEventListener('click', function() {
+            setTimeout(closeMoreMenu, 150);
+        });
+    });
+}
+
+// Toggle More Menu
+function toggleMoreMenu() {
+    const drawer = document.querySelector('.more-menu-drawer');
+    if (drawer) {
+        drawer.classList.toggle('active');
+        document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+    }
+}
+
+// Close More Menu
+function closeMoreMenu() {
+    const drawer = document.querySelector('.more-menu-drawer');
+    if (drawer) {
+        drawer.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 // Get current page name for navigation highlighting
 function getCurrentPageName() {
     const path = window.location.pathname;
+    const hash = window.location.hash;
     const page = path.split('/').pop() || 'index.html';
     
     if (page === 'index.html' || page === '') return 'home';
     if (page.includes('program')) return 'programs';
     if (page.includes('event')) return 'events';
     if (page.includes('notification')) return 'notifications';
+    if (page.includes('about')) return 'about';
+    if (page.includes('value')) return 'values';
+    if (page.includes('activit')) return 'activities';
+    if (page.includes('leader')) return 'leadership';
+    if (page.includes('media')) return 'media';
+    if (page.includes('ask-question')) {
+        return hash.includes('program-enrollment') ? 'join-programs' : 'ask-question';
+    }
     if (page.includes('contact')) return 'contact';
+    if (page.includes('join')) return 'join';
+    if (page.includes('donate')) return 'donate';
+    if (page.includes('pay')) {
+        if (hash.includes('semester')) return 'semester';
+        if (hash.includes('monthly')) return 'monthly';
+        if (hash.includes('zakat')) return 'zakat';
+        if (hash.includes('charity')) return 'charity';
+    }
     
     return 'home';
 }
