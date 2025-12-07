@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join KIUMA - Registration</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" height="40" width="40">KIUMA</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="values.html">Values</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="leadership.html">Leadership</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="media.html">Media</a></li>
+                <li><a href="ask-question.html" title="Ask Question">Ask Question</a></li>
+                <li><a href="ask-question.html#program-enrollment" title="Join Programs">Join Programs</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li class="dropdown">
+                    <a href="pay.html" class="dropdown-toggle">Pay <span style="font-size: 0.8em;">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pay.html#semester">Semester Subscription</a></li>
+                        <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                        <li><a href="pay.html#zakat">Zakat</a></li>
+                        <li><a href="pay.html#charity">Charity</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </li>
+                <li><a href="join.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Join Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 3rem 2rem;">
+        <div class="container">
+            <h1 style="color: white; text-align: center;">Join KIUMA</h1>
+            <p style="color: white; text-align: center; font-size: 1.2rem; margin-top: 1rem;">Become part of our Islamic community</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="form-container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Registration Form</h2>
+                <form id="join-form">
+                    <div class="form-group">
+                        <label for="fullname">Full Name *</label>
+                        <input type="text" id="fullname" name="fullname" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="class">Class / Level *</label>
+                        <select id="class" name="class" required>
+                            <option value="">Select your class/level</option>
+                            <option value="year1">Year 1</option>
+                            <option value="year2">Year 2</option>
+                            <option value="year3">Year 3</option>
+                            <option value="year4">Year 4</option>
+                            <option value="year5">Year 5</option>
+                            <option value="postgraduate">Postgraduate</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="program">Program of Study(students)///Department(lecturers)</label>
+                        <input type="text" id="program" name="program" placeholder="e.g., Medicine, Engineering, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+256 XXX XXX XXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="why-join" style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.75rem; display: block;">Why do you want to join KIUMA? *</label>
+                        <textarea 
+                            id="why-join" 
+                            name="why-join" 
+                            rows="5" 
+                            required 
+                            placeholder="Please tell us about your interest in joining KIUMA and what you hope to gain from the association..."
+                            style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; font-family: inherit; transition: border-color 0.3s ease, box-shadow 0.3s ease; resize: vertical; min-height: 120px; background-color: #fafafa;"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests" style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.75rem; display: block;">Areas of Interest (Select all that apply)</label>
+                        <div style="margin-top: 0.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(13, 125, 61, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%); border: 2px solid rgba(13, 125, 61, 0.1); border-radius: 10px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem;">
+                                <div style="display: flex; align-items: center; font-weight: normal; cursor: pointer; padding: 0.75rem; background: white; border-radius: 8px; transition: all 0.2s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--islamic-green)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+                                    <input type="checkbox" id="interest-quran" name="interests[]" value="quran" style="margin-right: 0.75rem; width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; accent-color: var(--islamic-green);"> 
+                                    <label for="interest-quran" style="margin: 0; cursor: pointer; flex: 1; font-size: 0.95rem;">Quran Memorization</label>
+                                </div>
+                                <div style="display: flex; align-items: center; font-weight: normal; cursor: pointer; padding: 0.75rem; background: white; border-radius: 8px; transition: all 0.2s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--islamic-green)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+                                    <input type="checkbox" id="interest-hadith" name="interests[]" value="hadith" style="margin-right: 0.75rem; width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; accent-color: var(--islamic-green);"> 
+                                    <label for="interest-hadith" style="margin: 0; cursor: pointer; flex: 1; font-size: 0.95rem;">Hadith Studies</label>
+                                </div>
+                                <div style="display: flex; align-items: center; font-weight: normal; cursor: pointer; padding: 0.75rem; background: white; border-radius: 8px; transition: all 0.2s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--islamic-green)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+                                    <input type="checkbox" id="interest-fiqh" name="interests[]" value="fiqh" style="margin-right: 0.75rem; width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; accent-color: var(--islamic-green);"> 
+                                    <label for="interest-fiqh" style="margin: 0; cursor: pointer; flex: 1; font-size: 0.95rem;">Fiqh (Islamic Jurisprudence)</label>
+                                </div>
+                                <div style="display: flex; align-items: center; font-weight: normal; cursor: pointer; padding: 0.75rem; background: white; border-radius: 8px; transition: all 0.2s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--islamic-green)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+                                    <input type="checkbox" id="interest-tafsir" name="interests[]" value="tafsir" style="margin-right: 0.75rem; width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; accent-color: var(--islamic-green);"> 
+                                    <label for="interest-tafsir" style="margin: 0; cursor: pointer; flex: 1; font-size: 0.95rem;">Tafsir (Quranic Exegesis)</label>
+                                </div>
+                                <div style="display: flex; align-items: center; font-weight: normal; cursor: pointer; padding: 0.75rem; background: white; border-radius: 8px; transition: all 0.2s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--islamic-green)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+                                    <input type="checkbox" id="interest-activities" name="interests[]" value="activities" style="margin-right: 0.75rem; width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; accent-color: var(--islamic-green);"> 
+                                    <label for="interest-activities" style="margin: 0; cursor: pointer; flex: 1; font-size: 0.95rem;">Community Activities</label>
+                                </div>
+                                <div style="display: flex; align-items: center; font-weight: normal; cursor: pointer; padding: 0.75rem; background: white; border-radius: 8px; transition: all 0.2s ease; border: 2px solid transparent;" onmouseover="this.style.borderColor='var(--islamic-green)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'">
+                                    <input type="checkbox" id="interest-charity" name="interests[]" value="charity" style="margin-right: 0.75rem; width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; accent-color: var(--islamic-green);"> 
+                                    <label for="interest-charity" style="margin: 0; cursor: pointer; flex: 1; font-size: 0.95rem;">Charity & Service</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(13, 125, 61, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%); border: 2px solid rgba(13, 125, 61, 0.2); border-radius: 10px;">
+                        <label style="display: flex; align-items: flex-start; font-weight: normal; cursor: pointer; gap: 0.75rem;">
+                            <input 
+                                type="checkbox" 
+                                required 
+                                style="
+                                    margin-top: 0.25rem;
+                                    width: 20px;
+                                    height: 20px;
+                                    cursor: pointer;
+                                    accent-color: var(--islamic-green);
+                                    flex-shrink: 0;
+                                ">
+                            <span style="color: var(--text-dark); line-height: 1.6; font-size: 0.95rem;">
+                                I confirm that I am a student at Kampala International University and agree to abide by KIUMA's values and guidelines. 
+                                <span style="color: var(--islamic-green); font-weight: 600;">*</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2.5rem;">
+                        <button 
+                            type="submit" 
+                            class="btn btn-primary" 
+                            style="
+                                width: 100%; 
+                                max-width: 500px;
+                                font-size: 1.15rem; 
+                                padding: 1.15rem 2rem; 
+                                font-weight: 600;
+                                background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+                                border: none;
+                                box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+                                transition: all 0.3s ease;
+                            "
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(212, 175, 55, 0.4)';"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(212, 175, 55, 0.3)';"
+                        >
+                            Submit Registration
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p>Have questions about joining? <a href="contact.html">Contact us</a> or visit our <a href="admissions.html">Admissions page</a> for more information.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>KIUMA</h3>
+                <p>Kampala International University Muslim Association</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="downloads.html">Downloads</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="weekly-teachings.html">Weekly Teachings</a></li>
+                    <li><a href="media.html">Media</a></li>
+                    <li><a href="ask-question.html">Ask a Question</a></li>
+                    <li><a href="notifications.html">Notifications</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <ul>
+                    <li><a href="join.html">Join KIUMA</a></li>
+                    <li><a href="pay.html">Pay & Subscribe</a></li>
+                    <li><a href="pay.html#semester">Semester Subscription</a></li>
+                    <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                    <li><a href="pay.html#charity">Charity</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="color: rgba(255, 255, 255, 0.9);">&copy; 2025 KIUMA - Kampala International University Muslim Association. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                <strong>Web Design by</strong> <a href="contact.html" style="color: var(--gold); text-decoration: none; font-weight: 600;">Your Name</a> | 
+                <strong>Need a website?</strong> <a href="contact.html" style="color: #8B4513; text-decoration: none;">Contact me</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
