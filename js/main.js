@@ -89,8 +89,204 @@ function initDropdowns() {
     });
 }
 
+// Mobile Menu Toggle
+function initMobileMenu() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+            const isActive = navMenu.classList.contains('active');
+            mobileToggle.innerHTML = isActive ? '✕' : '☰';
+            mobileToggle.setAttribute('aria-expanded', isActive);
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '☰';
+                mobileToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Close menu when clicking a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    mobileToggle.innerHTML = '☰';
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
+}
+
+// Touch-friendly improvements
+function initTouchOptimizations() {
+    // Add touch class to body for CSS targeting
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.body.classList.add('touch-device');
+    }
+    
+    // Improve dropdown for touch devices
+    if ('ontouchstart' in window) {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                }, { passive: true });
+            }
+        });
+    }
+}
+
+// Webview/App Container Detection (NOT regular mobile browsers)
+function isInWebView() {
+    // Check URL parameter for testing
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('webview') === 'true') {
+        return true;
+    }
+    
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Check for webview-specific properties (app containers)
+    const hasWebViewProperties = 
+        (window.ReactNativeWebView !== undefined) ||
+        (window.Android !== undefined) ||
+        (window.webkit?.messageHandlers !== undefined) ||
+        (window.chrome?.webview !== undefined);
+    
+    // Check for Android WebView (not regular Chrome)
+    const isAndroidWebView = /Android.*wv/i.test(userAgent) && 
+                             !/Chrome\/[.0-9]* Mobile/i.test(userAgent);
+    
+    // Check for iOS WKWebView (not regular Safari)
+    const isIOSWebView = /iPhone|iPad|iPod/.test(userAgent) && 
+                         !window.navigator.standalone && 
+                         !window.matchMedia('(display-mode: standalone)').matches &&
+                         (window.webkit?.messageHandlers !== undefined);
+    
+    // Check for standalone PWA mode (app-like)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    const isInApp = window.navigator.standalone === true;
+    
+    // Only return true for actual webviews/app containers, not regular mobile browsers
+    return hasWebViewProperties || isAndroidWebView || isIOSWebView || (isStandalone && window.innerWidth <= 768);
+}
+
+// Apply Native Mobile App Styling (only in webview/app container)
+function applyNativeMobileStyling() {
+    if (!isInWebView()) return;
+    
+    // Add webview class to body and html
+    document.body.classList.add('webview-mode');
+    document.documentElement.classList.add('webview-mode');
+    
+    // Create bottom navigation
+    if (!document.querySelector('.bottom-nav')) {
+        createBottomNavigation();
+    }
+    
+    // Hide top header in webview mode
+    const header = document.querySelector('header');
+    if (header) {
+        header.classList.add('webview-hidden');
+    }
+    
+    // Hide mobile menu toggle in webview mode
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    if (mobileToggle) {
+        mobileToggle.style.display = 'none';
+    }
+    
+    // Adjust body padding for bottom nav
+    document.body.style.paddingBottom = '70px';
+    document.body.style.paddingTop = '0';
+    
+    // Prevent pull-to-refresh in webview
+    let touchStartY = 0;
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+        if (window.scrollY === 0 && e.touches[0].clientY > touchStartY) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+// Create Bottom Navigation for Webview Mode
+function createBottomNavigation() {
+    const bottomNav = document.createElement('nav');
+    bottomNav.className = 'bottom-nav';
+    bottomNav.innerHTML = `
+        <a href="index.html" class="nav-item" data-page="home">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="programs.html" class="nav-item" data-page="programs">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">Programs</span>
+        </a>
+        <a href="events.html" class="nav-item" data-page="events">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">Events</span>
+        </a>
+        <a href="notifications.html" class="nav-item" data-page="notifications">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label">Alerts</span>
+        </a>
+        <a href="contact.html" class="nav-item" data-page="contact">
+            <span class="nav-icon">📞</span>
+            <span class="nav-label">Contact</span>
+        </a>
+    `;
+    
+    document.body.appendChild(bottomNav);
+    
+    // Highlight current page
+    const currentPage = getCurrentPageName();
+    const currentNavItem = bottomNav.querySelector(`[data-page="${currentPage}"]`);
+    if (currentNavItem) {
+        currentNavItem.classList.add('active');
+    }
+}
+
+// Get current page name for navigation highlighting
+function getCurrentPageName() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'index.html';
+    
+    if (page === 'index.html' || page === '') return 'home';
+    if (page.includes('program')) return 'programs';
+    if (page.includes('event')) return 'events';
+    if (page.includes('notification')) return 'notifications';
+    if (page.includes('contact')) return 'contact';
+    
+    return 'home';
+}
+
 // Initialize everything
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply native mobile styling if in webview/app container (NOT regular mobile browser)
+    applyNativeMobileStyling();
+    
+    // Initialize mobile menu (only if not in webview mode)
+    if (!isInWebView()) {
+        initMobileMenu();
+    }
+    
+    // Initialize touch optimizations
+    initTouchOptimizations();
+    
     // Initialize dropdowns
     initDropdowns();
 

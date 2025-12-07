@@ -1,5 +1,5 @@
 // Notifications Management System
-// Password: Change this to your desired admin password (same as media upload)
+// Admin Password: kiuma2025 (same for all admin features - prayer times, notifications, media)
 const ADMIN_PASSWORD = 'kiuma2025';
 
 // Initialize notifications

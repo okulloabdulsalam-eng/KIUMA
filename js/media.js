@@ -1,5 +1,5 @@
 // Media Management System
-// Password: Change this to your desired upload password
+// Admin Password: kiuma2025 (same for all admin features - prayer times, notifications, media)
 const UPLOAD_PASSWORD = 'kiuma2025';
 
 // Initialize media system

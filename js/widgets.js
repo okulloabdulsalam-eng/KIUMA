@@ -621,7 +621,7 @@ class RamadanCountdown {
 // ===== Prayer Times Admin Manager =====
 class PrayerTimesAdmin {
     constructor() {
-        this.password = 'kiuma2025'; // Same password as other admin features
+        this.password = 'kiuma2025'; // Admin password - same for all admin features (prayer times, notifications, media)
         this.init();
     }
 
