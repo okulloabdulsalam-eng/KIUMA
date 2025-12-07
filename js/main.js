@@ -1,5 +1,125 @@
 // KIUMA - Main JavaScript File - Clean Responsive Version
 
+// Webview Detection
+function isInWebView() {
+    // Check for various webview indicators
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Common webview user agents
+    const webviewPatterns = [
+        /wv/i,  // Android WebView
+        /WebView/i,
+        /Android.*(wv|\.0\.0\.0)/i,
+        /iPhone.*Mobile.*Safari/i,  // iOS webview (often)
+    ];
+    
+    // Check if running in standalone mode (PWA) or webview
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    const isInApp = window.navigator.standalone || isStandalone;
+    
+    // Check for webview-specific properties
+    const hasWebViewProperties = 
+        (window.ReactNativeWebView !== undefined) ||
+        (window.Android !== undefined) ||
+        (window.webkit?.messageHandlers !== undefined);
+    
+    // Check URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const isWebViewParam = urlParams.get('webview') === 'true';
+    
+    return webviewPatterns.some(pattern => pattern.test(userAgent)) || 
+           hasWebViewProperties || 
+           isInApp || 
+           isWebViewParam;
+}
+
+// Apply Native Mobile App Styling
+function applyNativeMobileStyling() {
+    if (!isInWebView()) return;
+    
+    // Add webview class to body
+    document.body.classList.add('webview-mode');
+    document.documentElement.classList.add('webview-mode');
+    
+    // Create bottom navigation if it doesn't exist
+    if (!document.querySelector('.bottom-nav')) {
+        createBottomNavigation();
+    }
+    
+    // Hide top header in webview mode
+    const header = document.querySelector('header');
+    if (header) {
+        header.classList.add('webview-hidden');
+    }
+    
+    // Adjust body padding for bottom nav
+    document.body.style.paddingBottom = '70px';
+    document.body.style.paddingTop = '0';
+    
+    // Prevent pull-to-refresh
+    let touchStartY = 0;
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+        if (window.scrollY === 0 && e.touches[0].clientY > touchStartY) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+// Create Bottom Navigation
+function createBottomNavigation() {
+    const bottomNav = document.createElement('nav');
+    bottomNav.className = 'bottom-nav';
+    bottomNav.innerHTML = `
+        <a href="index.html" class="nav-item" data-page="home">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="programs.html" class="nav-item" data-page="programs">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">Programs</span>
+        </a>
+        <a href="events.html" class="nav-item" data-page="events">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">Events</span>
+        </a>
+        <a href="notifications.html" class="nav-item" data-page="notifications">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label">Alerts</span>
+        </a>
+        <a href="contact.html" class="nav-item" data-page="contact">
+            <span class="nav-icon">📞</span>
+            <span class="nav-label">Contact</span>
+        </a>
+    `;
+    
+    document.body.appendChild(bottomNav);
+    
+    // Highlight current page
+    const currentPage = getCurrentPageName();
+    const currentNavItem = bottomNav.querySelector(`[data-page="${currentPage}"]`);
+    if (currentNavItem) {
+        currentNavItem.classList.add('active');
+    }
+}
+
+// Get current page name for navigation highlighting
+function getCurrentPageName() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'index.html';
+    
+    if (page === 'index.html' || page === '') return 'home';
+    if (page.includes('program')) return 'programs';
+    if (page.includes('event')) return 'events';
+    if (page.includes('notification')) return 'notifications';
+    if (page.includes('contact')) return 'contact';
+    
+    return 'home';
+}
+
 // Dropdown Menu Functionality
 function initDropdowns() {
     const dropdowns = document.querySelectorAll('.dropdown');
@@ -91,6 +211,9 @@ function initDropdowns() {
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply native mobile styling if in webview
+    applyNativeMobileStyling();
+    
     // Initialize dropdowns
     initDropdowns();
 
