@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media - KIUMA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .media-item {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        .media-item.hidden {
+            display: none;
+        }
+        .upload-section {
+            display: none;
+        }
+        .upload-section.active {
+            display: block;
+        }
+        .file-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .media-type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .badge-weekly { background: var(--islamic-green); color: white; }
+        .badge-audio { background: var(--gold); color: var(--text-dark); }
+        .badge-video { background: #e74c3c; color: white; }
+        .badge-books { background: #3498db; color: white; }
+        .badge-documents { background: #95a5a6; color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" height="40" width="40">KIUMA</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="values.html">Values</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="leadership.html">Leadership</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="media.html">Media</a></li>
+                <li><a href="ask-question.html" title="Ask Question">Ask Question</a></li>
+                <li><a href="ask-question.html#program-enrollment" title="Join Programs">Join Programs</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li class="dropdown">
+                    <a href="pay.html" class="dropdown-toggle">Pay <span style="font-size: 0.8em;">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pay.html#semester">Semester Subscription</a></li>
+                        <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                        <li><a href="pay.html#zakat">Zakat</a></li>
+                        <li><a href="pay.html#charity">Charity</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </li>
+                <li><a href="join.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Join Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 3rem 2rem;">
+        <div class="container">
+            <h1 style="color: white; text-align: center;">Media Library</h1>
+            <p style="color: white; text-align: center; font-size: 1.2rem; margin-top: 1rem;">Islamic teachings, lectures, and educational content</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn btn-outline" onclick="showUploadSection()" style="background: rgba(255, 255, 255, 0.2); color: white; border-color: white;">
+                    📤 Upload Media (Authorized Only)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section (Password Protected) -->
+    <section class="section upload-section" id="upload-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Upload Media Files</h2>
+                <form id="upload-form">
+                    <div class="form-group">
+                        <label>Enter Upload Password *</label>
+                        <input type="password" id="upload-password" required placeholder="Enter password to upload">
+                        <small style="color: var(--text-light);">Only authorized personnel can upload files</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="file-input" style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.75rem; display: block;">Select File *</label>
+                        <div style="position: relative;">
+                            <input 
+                                type="file" 
+                                id="file-input" 
+                                required
+                                style="
+                                    width: 100%;
+                                    padding: 0.75rem;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    font-size: 1rem;
+                                    background-color: #fafafa;
+                                    cursor: pointer;
+                                    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                                "
+                                onchange="updateFileName(this)"
+                            >
+                            <small id="file-name-display" style="display: block; margin-top: 0.5rem; color: var(--text-light); font-size: 0.9rem;"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="file-title">File Title *</label>
+                        <input type="text" id="file-title" required placeholder="e.g., Quran Session 1 - Introduction">
+                    </div>
+                    <div class="form-group">
+                        <label for="file-type">Media Type *</label>
+                        <select id="file-type" required>
+                            <option value="">Select type</option>
+                            <option value="weekly">Weekly Teachings</option>
+                            <option value="audio">Audio</option>
+                            <option value="video">Video</option>
+                            <option value="books">Books</option>
+                            <option value="documents">Documents</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="weekly-category-group" style="display: none;">
+                        <label for="weekly-category">Weekly Teaching Category *</label>
+                        <select id="weekly-category">
+                            <option value="">Select category</option>
+                            <option value="quran-yasaruna">Monday-Thursday: Quran and Yasaruna</option>
+                            <option value="hadith-memorisation">Tuesday: Hadith Memorisation</option>
+                            <option value="hadith-explanation">Friday: Hadith Explanation</option>
+                            <option value="tawheed">Saturday: Kitaabu Tawheed</option>
+                            <option value="fiqh-swalah">Sunday: Fiqh Swalah</option>
+                            <option value="arbauna-nawawi">Sunday: Arbauna Nawawi</option>
+                            <option value="tafsir">Sunday: Tafsir</option>
+                            <option value="arabic-classes">Saturday & Sunday: Arabic Classes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="file-description">Description (Optional)</label>
+                        <textarea id="file-description" rows="3" placeholder="Brief description of the file..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="file-teacher">Teacher/Speaker (Optional)</label>
+                        <input type="text" id="file-teacher" placeholder="e.g., Imam Fahad">
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Upload File</button>
+                        <button type="button" class="btn btn-outline" onclick="hideUploadSection()" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+                <div id="upload-message" style="margin-top: 1rem; text-align: center;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Type Filter -->
+    <section class="section" style="background-color: #f8f9fa; padding: 2rem 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Browse by Type</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary media-filter-btn active" data-type="all" onclick="filterMedia('all')">All Media</button>
+                    <button class="btn btn-outline media-filter-btn" data-type="weekly" onclick="filterMedia('weekly')">Weekly Teachings</button>
+                    <button class="btn btn-outline media-filter-btn" data-type="audio" onclick="filterMedia('audio')">Audio</button>
+                    <button class="btn btn-outline media-filter-btn" data-type="video" onclick="filterMedia('video')">Video</button>
+                    <button class="btn btn-outline media-filter-btn" data-type="books" onclick="filterMedia('books')">Books</button>
+                    <button class="btn btn-outline media-filter-btn" data-type="documents" onclick="filterMedia('documents')">Documents</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Display Section -->
+    <section class="section">
+        <div class="container">
+            <div id="media-container" class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+                <!-- Media items will be dynamically inserted here -->
+            </div>
+            <div id="no-media-message" style="text-align: center; padding: 3rem; display: none;">
+                <p style="font-size: 1.2rem; color: var(--text-light);">No media files found. Check back later or upload new content.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>KIUMA</h3>
+                <p>Kampala International University Muslim Association</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="downloads.html">Downloads</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="weekly-teachings.html">Weekly Teachings</a></li>
+                    <li><a href="media.html">Media</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <ul>
+                    <li><a href="join.html">Join KIUMA</a></li>
+                    <li><a href="pay.html">Pay & Subscribe</a></li>
+                    <li><a href="pay.html#semester">Semester Subscription</a></li>
+                    <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                    <li><a href="pay.html#charity">Charity</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="color: rgba(255, 255, 255, 0.9);">&copy; 2025 KIUMA - Kampala International University Muslim Association. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                <strong>Web Design by</strong> <a href="contact.html" style="color: var(--gold); text-decoration: none; font-weight: 600;">Your Name</a> | 
+                <strong>Need a website?</strong> <a href="contact.html" style="color: #8B4513; text-decoration: none;">Contact me</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/media.js"></script>
+    <script>
+        // Update file name display when file is selected
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('file-name-display');
+            if (input.files && input.files.length > 0) {
+                const file = input.files[0];
+                const fileSize = (file.size / 1024 / 1024).toFixed(2);
+                fileNameDisplay.textContent = `Selected: ${file.name} (${fileSize} MB)`;
+                fileNameDisplay.style.color = 'var(--islamic-green)';
+                fileNameDisplay.style.fontWeight = '600';
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>

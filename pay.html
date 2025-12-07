@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay & Subscribe - KIUMA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" height="40" width="40">KIUMA</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="values.html">Values</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="leadership.html">Leadership</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="media.html">Media</a></li>
+                <li><a href="ask-question.html" title="Ask Question">Ask Question</a></li>
+                <li><a href="ask-question.html#program-enrollment" title="Join Programs">Join Programs</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li class="dropdown">
+                    <a href="pay.html" class="dropdown-toggle">Pay <span style="font-size: 0.8em;">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pay.html#semester">Semester Subscription</a></li>
+                        <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                        <li><a href="pay.html#zakat">Zakat</a></li>
+                        <li><a href="pay.html#charity">Charity</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </li>
+                <li><a href="join.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Join Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 3rem 2rem;">
+        <div class="container">
+            <h1 style="color: white; text-align: center;">Pay & Subscribe</h1>
+            <p style="color: white; text-align: center; font-size: 1.2rem; margin-top: 1rem;">Support KIUMA through subscriptions and donations</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Payment Options</h2>
+                <p>Choose your preferred payment method</p>
+            </div>
+
+            <!-- Semester Subscription -->
+            <div id="semester" class="card" style="margin-bottom: 3rem; scroll-margin-top: 100px;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">📅</div>
+                    <h2>Semester Subscription</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light);">Support KIUMA with a semester subscription</p>
+                </div>
+
+                <div class="card-grid" style="margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">Undergraduate</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            10,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1rem;">Per Semester (and above)</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Weekly teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 10000, 'semester', 'undergraduate')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">Postgraduate</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            20,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1rem;">Per Semester (and above)</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                weekly-teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 20000, 'semester', 'postgraduate')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">University Staff</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            50,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1rem;">Per Semester (and above)</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                weekly-teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 50000, 'semester', 'university-staff')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">Elders</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            50,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1rem;">Per Semester (and above)</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                weekly-teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 50000, 'semester', 'elders')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Subscription -->
+            <div id="monthly" class="card" style="margin-bottom: 3rem; scroll-margin-top: 100px;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">💳</div>
+                    <h2>Monthly Subscription</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light);">Support KIUMA with a monthly subscription</p>
+                </div>
+
+                <div class="card-grid" style="margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">Undergraduate</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            15,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Per Month</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Weekly teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community access
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 15000, 'monthly', 'undergraduate')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">Postgraduate</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            25,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Per Month</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                weekly-teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 25000, 'monthly', 'postgraduate')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">University Staff</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            35,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Per Month</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                weekly-teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 35000, 'monthly', 'university-staff')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.25rem;">
+                        <h3 style="color: var(--islamic-green); font-size: 1.1rem; margin-bottom: 0.75rem;">Elders</h3>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--gold); margin: 0.75rem 0;">
+                            50,000 UGX
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Per Month</p>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0; text-align: left; font-size: 0.9rem;">
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                All programs access
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                weekly-teachings
+                            </li>
+                            <li style="padding: 0.4rem 0; padding-left: 1.25rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--islamic-green);">✓</span>
+                                Community activities
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="payWithFlutterwave('mtn', 50000, 'monthly', 'elders')" style="width: 100%; padding: 0.7rem; font-size: 0.9rem;">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zakat -->
+            <div id="zakat" class="card" style="margin-bottom: 3rem; scroll-margin-top: 100px;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">💰</div>
+                    <h2>Zakat</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light);">Fulfill your Zakat obligation and support those in need</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(13, 125, 61, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border: 2px solid var(--islamic-green);">
+                    <h3 style="color: var(--islamic-green); margin-bottom: 1rem; text-align: center;">About Zakat</h3>
+                    <p style="color: var(--text-dark); margin-bottom: 1rem; text-align: center;">
+                        Zakat is one of the Five Pillars of Islam. It is a mandatory charitable contribution, typically 2.5% of one's wealth, 
+                        given to help those in need and support Islamic causes.
+                    </p>
+                    <p style="color: var(--text-dark); text-align: center; font-size: 0.9rem;">
+                        <strong>Zakat Rate:</strong> 2.5% of your eligible wealth (Nisab threshold applies)
+                    </p>
+                </div>
+
+                <div class="form-container" style="max-width: 600px;">
+                    <form id="zakat-form">
+                        <div class="form-group">
+                            <label for="zakat-name">Your Name *</label>
+                            <input type="text" id="zakat-name" name="zakat-name" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zakat-email">Email Address *</label>
+                            <input type="email" id="zakat-email" name="zakat-email" required placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zakat-phone">Phone Number</label>
+                            <input type="tel" id="zakat-phone" name="zakat-phone" placeholder="+256 XXX XXX XXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Zakat Amount (UGX) *</label>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                                Enter the amount you wish to pay as Zakat
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                                <button type="button" class="zakat-amount btn btn-outline" data-amount="50000">50,000</button>
+                                <button type="button" class="zakat-amount btn btn-outline" data-amount="100000">100,000</button>
+                                <button type="button" class="zakat-amount btn btn-outline" data-amount="250000">250,000</button>
+                                <button type="button" class="zakat-amount btn btn-outline" data-amount="500000">500,000</button>
+                            </div>
+                            <input type="number" id="zakat-amount" name="zakat-amount" required placeholder="Enter your Zakat amount" style="margin-top: 0.5rem;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zakat-purpose">Zakat Distribution (Optional)</label>
+                            <select id="zakat-purpose" name="zakat-purpose">
+                                <option value="">Select distribution preference (optional)</option>
+                                <option value="orphans">Orphans</option>
+                                <option value="poor">Poor & Needy</option>
+                                <option value="students">Student Support</option>
+                                <option value="mosque">Mosque Building</option>
+                                <option value="dawah">Dawah Programs</option>
+                                <option value="general">General Zakat Fund</option>
+                            </select>
+                            <small style="color: var(--text-light);">Zakat will be distributed according to Islamic guidelines</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zakat-message">Additional Message (Optional)</label>
+                            <textarea id="zakat-message" name="zakat-message" rows="3" placeholder="Any special instructions or intentions..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: start; font-weight: normal;">
+                                <input type="checkbox" required>
+                                <span>I confirm that this is my Zakat payment and I have calculated it according to Islamic guidelines. *</span>
+                            </label>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 1rem;">Proceed to Payment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Charity -->
+            <div id="charity" class="card" style="margin-bottom: 3rem; scroll-margin-top: 100px;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">💚</div>
+                    <h2>Charity & Donations</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light);">Support our charitable activities and community service</p>
+                </div>
+
+                <div class="form-container" style="max-width: 600px;">
+                    <form id="charity-form">
+                        <div class="form-group">
+                            <label for="charity-name">Your Name *</label>
+                            <input type="text" id="charity-name" name="charity-name" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="charity-email">Email Address *</label>
+                            <input type="email" id="charity-email" name="charity-email" required placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="charity-phone">Phone Number</label>
+                            <input type="tel" id="charity-phone" name="charity-phone" placeholder="+256 XXX XXX XXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Donation Amount (UGX)</label>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                                <button type="button" class="donation-amount btn btn-outline" data-amount="10000">10,000</button>
+                                <button type="button" class="donation-amount btn btn-outline" data-amount="25000">25,000</button>
+                                <button type="button" class="donation-amount btn btn-outline" data-amount="50000">50,000</button>
+                                <button type="button" class="donation-amount btn btn-outline" data-amount="100000">100,000</button>
+                            </div>
+                            <input type="number" id="charity-amount" name="charity-amount" placeholder="Or enter custom amount" style="margin-top: 0.5rem;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="charity-purpose">Purpose of Donation</label>
+                            <select id="charity-purpose" name="charity-purpose">
+                                <option value="">Select purpose (optional)</option>
+                                <option value="general">General Charity Fund</option>
+                                <option value="food">Food Distribution</option>
+                                <option value="orphan">Orphan Support</option>
+                                <option value="education">Educational Support</option>
+                                <option value="infrastructure">Infrastructure</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="charity-message">Message (Optional)</label>
+                            <textarea id="charity-message" name="charity-message" rows="3" placeholder="Any special instructions or messages..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: start; font-weight: normal;">
+                                <input type="checkbox" required>
+                                <span>I confirm that this donation is made voluntarily and with the intention of seeking Allah's pleasure. *</span>
+                            </label>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 1rem;">Proceed to Payment</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: rgba(13, 125, 61, 0.1); border-radius: 10px;">
+                    <h3 style="text-align: center; margin-bottom: 1rem;">Payment Methods</h3>
+                    
+                    <!-- Manual Payment Methods - Encouraged -->
+                    <div style="margin-bottom: 2rem;">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <h4 style="color: var(--islamic-green); margin-bottom: 0.5rem;">📞 Manual Payment</h4>
+                            <span class="badge" style="background: var(--gold); color: var(--text-dark); font-size: 0.85rem; padding: 0.3rem 0.8rem;">RECOMMENDED</span>
+                        </div>
+                        <div class="card-grid">
+                            <div class="card" style="text-align: center; border: 2px solid var(--gold);">
+                                <h4>📱 Mobile Money</h4>
+                                <p style="margin: 0.75rem 0;"><strong>MTN:</strong> +256 XXX XXX XXX</p>
+                                <p style="margin: 0.75rem 0;"><strong>Airtel:</strong> +256 XXX XXX XXX</p>
+                                <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-light);">Send payment and include reference</p>
+                            </div>
+                            <div class="card" style="text-align: center; border: 2px solid var(--gold);">
+                                <h4>🏦 Bank Transfer</h4>
+                                <p style="margin: 0.75rem 0;"><strong>Account:</strong> KIUMA</p>
+                                <p style="margin: 0.75rem 0;"><strong>Number:</strong> XXXX XXXX XXXX</p>
+                                <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-light);">Include your name in reference</p>
+                            </div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); padding: 1.5rem; border-radius: 10px; margin-top: 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); border: 3px solid var(--islamic-green);">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚠️</div>
+                                <h4 style="color: var(--islamic-green-dark); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    Important Notice
+                                </h4>
+                                <p style="color: var(--text-dark); font-weight: 600; font-size: 1.1rem; line-height: 1.6; margin: 0;">
+                                    After payment, please contact us with your transaction reference for confirmation.
+                                </p>
+                                <p style="color: var(--islamic-green-dark); font-weight: 600; font-size: 0.95rem; margin-top: 0.75rem; margin-bottom: 0;">
+                                    📞 Contact: <a href="contact.html" style="color: var(--islamic-green-dark); text-decoration: underline; font-weight: 700;">Click here to contact us</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flutterwave Payment Section - Alternative -->
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(13, 125, 61, 0.2);">
+                        <h4 style="text-align: center; margin-bottom: 1.5rem; color: var(--text-light); font-weight: normal;">💳 Alternative: Pay with Flutterwave</h4>
+                        <div class="card-grid">
+                            <div class="card" style="text-align: center;">
+                                <h4>📱 MTN Mobile Money</h4>
+                                <p style="margin: 1rem 0; font-size: 0.9rem;">Pay securely via MTN Mobile Money</p>
+                                <button type="button" class="btn btn-outline" onclick="payWithFlutterwave('mtn')" style="width: 100%; margin-top: 1rem;">
+                                    Pay with MTN
+                                </button>
+                            </div>
+                            <div class="card" style="text-align: center;">
+                                <h4>📱 Airtel Mobile Money</h4>
+                                <p style="margin: 1rem 0; font-size: 0.9rem;">Pay securely via Airtel Money</p>
+                                <button type="button" class="btn btn-outline" onclick="payWithFlutterwave('airtel')" style="width: 100%; margin-top: 1rem;">
+                                    Pay with Airtel
+                                </button>
+                            </div>
+                            <div class="card" style="text-align: center;">
+                                <h4>🏦 Bank Transfer</h4>
+                                <p style="margin: 1rem 0; font-size: 0.9rem;">Pay via bank transfer</p>
+                                <button type="button" class="btn btn-outline" onclick="payWithFlutterwave('bank')" style="width: 100%; margin-top: 1rem;">
+                                    Pay via Bank
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>KIUMA</h3>
+                <p>Kampala International University Muslim Association</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="downloads.html">Downloads</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="weekly-teachings.html">Weekly Teachings</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <ul>
+                    <li><a href="join.html">Join KIUMA</a></li>
+                    <li><a href="pay.html">Pay & Subscribe</a></li>
+                    <li><a href="pay.html#semester">Semester Subscription</a></li>
+                    <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                    <li><a href="pay.html#charity">Charity</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="color: rgba(255, 255, 255, 0.9);">&copy; 2025 KIUMA - Kampala International University Muslim Association. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                <strong>Web Design by</strong> <a href="contact.html" style="color: var(--gold); text-decoration: none; font-weight: 600;">Your Name</a> | 
+                <strong>Need a website?</strong> <a href="contact.html" style="color: #8B4513; text-decoration: none;">Contact me</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // ============================================
+        // FLUTTERWAVE CONFIGURATION
+        // ============================================
+        // IMPORTANT: Replace the placeholder below with your actual Flutterwave Public Key
+        // Get your keys from: https://dashboard.flutterwave.com/
+        // 1. Log in to your Flutterwave dashboard
+        // 2. Go to Settings → API Keys
+        // 3. Copy your Public Key (use Test key for testing, Live key for production)
+        // 4. Replace "YOUR_FLUTTERWAVE_PUBLIC_KEY" below with your actual key
+        // ============================================
+        const FLUTTERWAVE_PUBLIC_KEY = "YOUR_FLUTTERWAVE_PUBLIC_KEY"; // ⚠️ REPLACE THIS WITH YOUR ACTUAL KEY
+        // ============================================
+
+        // Store payment details globally
+        let currentPaymentDetails = {
+            amount: 0,
+            type: '',
+            plan: '',
+            purpose: 'subscription'
+        };
+
+        function selectPayment(type, plan, amount) {
+            // Scroll to payment form section
+            const charitySection = document.getElementById('charity');
+            if (charitySection) {
+                charitySection.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Store payment details
+            currentPaymentDetails = {
+                amount: amount,
+                type: type,
+                plan: plan,
+                purpose: type === 'charity' ? 'charity' : 'subscription'
+            };
+            
+            // Set the amount in charity form
+            setTimeout(() => {
+                const amountInput = document.getElementById('charity-amount');
+                if (amountInput) {
+                    amountInput.value = amount;
+                }
+                
+                // Show notification
+                alert(`Selected: ${plan.charAt(0).toUpperCase() + plan.slice(1)} ${type} plan - ${amount.toLocaleString()} UGX\n\nPlease fill in the form below to complete your payment.`);
+            }, 500);
+        }
+
+        // Flutterwave Payment Function
+        function payWithFlutterwave(paymentMethod, amount = null, type = null, plan = null) {
+            // Use provided parameters or get from form/stored values
+            if (amount) {
+                currentPaymentDetails.amount = amount;
+                currentPaymentDetails.type = type || currentPaymentDetails.type;
+                currentPaymentDetails.plan = plan || currentPaymentDetails.plan;
+            } else {
+                // Get amount from form or use stored amount
+                amount = currentPaymentDetails.amount;
+                const charityAmount = document.getElementById('charity-amount');
+                
+                if (charityAmount && charityAmount.value) {
+                    amount = parseFloat(charityAmount.value);
+                }
+            }
+            
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount first.');
+                return;
+            }
+
+            // Get customer details
+            const name = document.getElementById('charity-name')?.value || 'KIUMA Member';
+            const email = document.getElementById('charity-email')?.value || 'member@kiuma.ac.ug';
+            const phone = document.getElementById('charity-phone')?.value || '';
+            const purpose = document.getElementById('charity-purpose')?.value || currentPaymentDetails.purpose || 'subscription';
+
+            // Determine payment method code for Flutterwave
+            let paymentMethodCode = '';
+            switch(paymentMethod) {
+                case 'mtn':
+                    paymentMethodCode = 'mobilemoneyuganda';
+                    break;
+                case 'airtel':
+                    paymentMethodCode = 'mobilemoneyuganda';
+                    break;
+                case 'bank':
+                    paymentMethodCode = 'account';
+                    break;
+                default:
+                    paymentMethodCode = '';
+            }
+
+            // Flutterwave payment configuration
+            // Check if public key is configured
+            if (FLUTTERWAVE_PUBLIC_KEY === "YOUR_FLUTTERWAVE_PUBLIC_KEY" || !FLUTTERWAVE_PUBLIC_KEY) {
+                alert('⚠️ Flutterwave Public Key not configured!\n\nPlease add your Flutterwave Public Key in the script section at the top of this page.\n\nGet your key from: https://dashboard.flutterwave.com/');
+                return;
+            }
+
+            FlutterwaveCheckout({
+                public_key: FLUTTERWAVE_PUBLIC_KEY,
+                tx_ref: "KIUMA-" + Date.now(),
+                amount: amount,
+                currency: "UGX",
+                payment_options: paymentMethodCode,
+                customer: {
+                    email: email,
+                    phone_number: phone,
+                    name: name,
+                },
+                customizations: {
+                    title: "KIUMA Payment",
+                    description: `Payment for ${currentPaymentDetails.type} ${currentPaymentDetails.plan || purpose}`,
+                    logo: "https://your-domain.com/logo.png", // Add your logo URL
+                },
+                callback: function (data) {
+                    // Payment successful
+                    console.log('Payment successful:', data);
+                    alert('Payment successful! Thank you for your support. Transaction ID: ' + data.tx_ref);
+                    
+                    // You can send this data to your server for verification
+                    // verifyPayment(data);
+                },
+                onclose: function() {
+                    // Payment modal closed
+                    console.log('Payment modal closed');
+                },
+                meta: {
+                    purpose: purpose,
+                    payment_type: currentPaymentDetails.type,
+                    plan: currentPaymentDetails.plan
+                }
+            });
+        }
+
+        // Update forms submission to include Flutterwave option
+        document.addEventListener('DOMContentLoaded', function() {
+            // Zakat form submission
+            const zakatForm = document.getElementById('zakat-form');
+            if (zakatForm) {
+                zakatForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('zakat-name').value;
+                    const email = document.getElementById('zakat-email').value;
+                    const amount = document.getElementById('zakat-amount').value;
+                    const purpose = document.getElementById('zakat-purpose').value || 'zakat';
+                    
+                    if (!name || !email || !amount) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    currentPaymentDetails = {
+                        amount: parseFloat(amount),
+                        type: 'zakat',
+                        plan: '',
+                        purpose: purpose
+                    };
+                    
+                    const useFlutterwave = confirm('Would you like to pay securely with Flutterwave?\n\nClick OK for Flutterwave (MTN/Airtel/Bank)\nClick Cancel for manual payment instructions.');
+                    
+                    if (useFlutterwave) {
+                        payWithFlutterwave('mtn', parseFloat(amount), 'zakat', purpose);
+                    } else {
+                        alert('Please use the manual payment methods below to complete your Zakat payment.');
+                    }
+                });
+
+                // Zakat amount buttons
+                document.querySelectorAll('.zakat-amount').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const amount = this.getAttribute('data-amount');
+                        document.getElementById('zakat-amount').value = amount;
+                        document.querySelectorAll('.zakat-amount').forEach(btn => {
+                            btn.classList.remove('btn-primary');
+                            btn.classList.add('btn-outline');
+                        });
+                        this.classList.remove('btn-outline');
+                        this.classList.add('btn-primary');
+                    });
+                });
+            }
+
+            // Charity form submission
+            const charityForm = document.getElementById('charity-form');
+            if (charityForm) {
+                charityForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('charity-name').value;
+                    const email = document.getElementById('charity-email').value;
+                    const amount = document.getElementById('charity-amount').value;
+                    const purpose = document.getElementById('charity-purpose').value || 'charity';
+                    
+                    if (!name || !email || !amount) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    // Store payment details
+                    currentPaymentDetails = {
+                        amount: parseFloat(amount),
+                        type: 'charity',
+                        plan: '',
+                        purpose: purpose
+                    };
+                    
+                    // Show payment method selection
+                    const useFlutterwave = confirm('Would you like to pay securely with Flutterwave?\n\nClick OK for Flutterwave (MTN/Airtel/Bank)\nClick Cancel for manual payment instructions.');
+                    
+                    if (useFlutterwave) {
+                        // Scroll to Flutterwave payment section
+                        document.querySelector('[onclick*="payWithFlutterwave"]')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        alert('Please select your preferred payment method above (MTN, Airtel, or Bank Transfer).');
+                    } else {
+                        // Show manual payment instructions
+                        alert('Please use the manual payment methods shown below.\n\nAfter payment, contact us with your transaction reference.');
+                    }
+                });
+            }
+
+            // Handle donation amount buttons
+            const donationButtons = document.querySelectorAll('.donation-amount');
+            donationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    donationButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const amount = this.dataset.amount;
+                    document.getElementById('charity-amount').value = amount;
+                    currentPaymentDetails.amount = parseFloat(amount);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

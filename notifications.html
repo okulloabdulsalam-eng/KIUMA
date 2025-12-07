@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications & Announcements - KIUMA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .notification-item {
+            background: white;
+            border-left: 4px solid var(--islamic-green);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .notification-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px var(--shadow-lg);
+        }
+        .notification-item.unread {
+            background: rgba(13, 125, 61, 0.05);
+            border-left-color: var(--gold);
+        }
+        .notification-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .category-salah { background: var(--islamic-green); color: white; }
+        .category-events { background: var(--gold); color: var(--text-dark); }
+        .category-updates { background: #3498db; color: white; }
+        .category-blog { background: #9b59b6; color: white; }
+        .notification-time {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        .subscribe-section {
+            background: linear-gradient(135deg, rgba(13, 125, 61, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--islamic-green);
+        }
+        .admin-section {
+            padding: 3rem 0;
+        }
+        .admin-section .card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" height="40" width="40">KIUMA</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="values.html">Values</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="activities.html">Activities</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="leadership.html">Leadership</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="media.html">Media</a></li>
+                <li><a href="ask-question.html" title="Ask Question">Ask Question</a></li>
+                <li><a href="ask-question.html#program-enrollment" title="Join Programs">Join Programs</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li class="dropdown">
+                    <a href="pay.html" class="dropdown-toggle">Pay <span style="font-size: 0.8em;">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pay.html#semester">Semester Subscription</a></li>
+                        <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                        <li><a href="pay.html#zakat">Zakat</a></li>
+                        <li><a href="pay.html#charity">Charity</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </li>
+                <li><a href="join.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Join Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 3rem 2rem;">
+        <div class="container">
+            <h1 style="color: white; text-align: center;">Notifications & Announcements</h1>
+            <p style="color: white; text-align: center; font-size: 1.2rem; margin-top: 1rem;">Stay updated with the latest from KIUMA</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn btn-outline" onclick="showAdminSection()" style="background: rgba(255, 255, 255, 0.2); color: white; border-color: white;">
+                    🔐 Admin: Add Notification (Authorized Only)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section (Password Protected) -->
+    <section class="section admin-section" id="admin-section" style="background-color: #f8f9fa; display: none;">
+        <div class="container">
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Add New Notification</h2>
+                <form id="admin-notification-form">
+                    <div class="form-group">
+                        <label>Enter Admin Password *</label>
+                        <input type="password" id="admin-password" required placeholder="Enter password to add notifications">
+                        <small style="color: var(--text-light);">Only authorized administrators can add notifications</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="notification-title">Notification Title *</label>
+                        <input type="text" id="notification-title" required placeholder="e.g., Upcoming Seminar: Understanding Tawheed">
+                    </div>
+                    <div class="form-group">
+                        <label for="notification-content">Notification Content *</label>
+                        <textarea id="notification-content" rows="5" required placeholder="Enter the notification message..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="notification-category">Category *</label>
+                        <select id="notification-category" required>
+                            <option value="">Select category</option>
+                            <option value="salah">🕌 Salah Reminder</option>
+                            <option value="events">📅 Events</option>
+                            <option value="updates">📢 Updates from School</option>
+                            <option value="blog">📚 Blog Posts</option>
+                            <option value="courses">📖 New Courses</option>
+                            <option value="ramadan">🌙 Ramadan Programs</option>
+                            <option value="friday">🕌 Friday Reminders</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notification-priority">Priority (Optional)</label>
+                        <select id="notification-priority">
+                            <option value="normal">Normal</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Add Notification</button>
+                        <button type="button" class="btn btn-outline" onclick="hideAdminSection()" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+                <div id="admin-message" style="margin-top: 1rem; text-align: center;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="section">
+        <div class="container">
+            <div class="subscribe-section">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">📧</div>
+                    <h2 style="color: var(--islamic-green); margin-bottom: 1rem;">Subscribe to Notifications</h2>
+                    <p style="color: var(--text-dark); font-size: 1.1rem;">Get push notifications for:</p>
+                </div>
+
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🕌</div>
+                        <h3 style="color: var(--islamic-green); margin-bottom: 0.75rem;">Salah Reminders</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-light);">Get timely reminders for all five daily prayers</p>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📅</div>
+                        <h3 style="color: var(--islamic-green); margin-bottom: 0.75rem;">Events</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-light);">Notifications about seminars, competitions, and community gatherings</p>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📢</div>
+                        <h3 style="color: var(--islamic-green); margin-bottom: 0.75rem;">Updates from School</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-light);">Important announcements and updates from KIUMA</p>
+                    </div>
+
+                    <div class="card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
+                        <h3 style="color: var(--islamic-green); margin-bottom: 0.75rem;">Blog Posts</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-light);">New Islamic teaching articles and educational content</p>
+                    </div>
+                </div>
+
+                <div class="card" style="max-width: 600px; margin: 0 auto;">
+                    <h3>Subscribe Form</h3>
+                    <form id="notification-subscribe-form">
+                        <div class="form-group">
+                            <label for="subscriber-name">Your Name *</label>
+                            <input type="text" id="subscriber-name" name="subscriber-name" required 
+                                   placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subscriber-email">Email Address *</label>
+                            <input type="email" id="subscriber-email" name="subscriber-email" required 
+                                   placeholder="your.email@example.com">
+                            <small>We'll send notifications to this email</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subscriber-phone">Phone Number (Optional)</label>
+                            <input type="tel" id="subscriber-phone" name="subscriber-phone" 
+                                   placeholder="+256 XXX XXX XXX">
+                            <small>For SMS notifications (optional)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Notification Preferences *</label>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;">Select which notifications you'd like to receive:</p>
+                            <div style="display: grid; gap: 0.75rem; margin-top: 0.5rem;">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-salah" name="notifications[]" value="salah" checked>
+                                    <label for="notif-salah">🕌 Salah Reminders (Daily prayer times)</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-events" name="notifications[]" value="events" checked>
+                                    <label for="notif-events">📅 Events (Seminars, competitions, gatherings)</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-updates" name="notifications[]" value="updates" checked>
+                                    <label for="notif-updates">📢 Updates from School (Announcements, news)</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-blog" name="notifications[]" value="blog">
+                                    <label for="notif-blog">📚 Blog Posts (New articles and teachings)</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-courses" name="notifications[]" value="courses">
+                                    <label for="notif-courses">📖 New Courses (Program announcements)</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-ramadan" name="notifications[]" value="ramadan">
+                                    <label for="notif-ramadan">🌙 Ramadan Programs (Special Ramadan activities)</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="notif-friday" name="notifications[]" value="friday">
+                                    <label for="notif-friday">🕌 Friday Reminders (Jumu'ah prayer reminders)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: start; font-weight: normal;">
+                                <input type="checkbox" required style="margin-right: 0.5rem; margin-top: 0.2rem;">
+                                <span>I agree to receive notifications from KIUMA and understand that I can unsubscribe at any time. *</span>
+                            </label>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn btn-primary">
+                                📧 Subscribe to Notifications
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="subscribe-message" style="margin-top: 1.5rem; text-align: center;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Notifications Section -->
+    <section class="section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recent Notifications</h2>
+                <p>Latest announcements and updates</p>
+            </div>
+
+            <div id="notifications-list">
+                <!-- Notifications will be dynamically loaded here -->
+            </div>
+            <div id="no-notifications-message" style="text-align: center; padding: 3rem; display: none;">
+                <p style="font-size: 1.2rem; color: var(--text-light);">No notifications yet. Check back later for updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>KIUMA</h3>
+                <p>Kampala International University Muslim Association</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="downloads.html">Downloads</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="weekly-teachings.html">Weekly Teachings</a></li>
+                    <li><a href="media.html">Media</a></li>
+                    <li><a href="ask-question.html">Ask a Question</a></li>
+                    <li><a href="notifications.html">Notifications</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <ul>
+                    <li><a href="join.html">Join KIUMA</a></li>
+                    <li><a href="pay.html">Pay & Subscribe</a></li>
+                    <li><a href="pay.html#semester">Semester Subscription</a></li>
+                    <li><a href="pay.html#monthly">Monthly Subscription</a></li>
+                    <li><a href="pay.html#zakat">Zakat</a></li>
+                    <li><a href="pay.html#charity">Charity</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="color: rgba(255, 255, 255, 0.9);">&copy; 2025 KIUMA - Kampala International University Muslim Association. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                <strong>Web Design by</strong> <a href="contact.html" style="color: var(--gold); text-decoration: none; font-weight: 600;">Your Name</a> | 
+                <strong>Need a website?</strong> <a href="contact.html" style="color: #8B4513; text-decoration: none;">Contact me</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>
+
